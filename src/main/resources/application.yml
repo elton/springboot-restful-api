@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: restful-api
+  datasource:
+    url: jdbc:mysql://localhost:3306/spring
+    username: root
+    password:
+    platform: mysql
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+server:
+  servlet:
+    context-path: /api

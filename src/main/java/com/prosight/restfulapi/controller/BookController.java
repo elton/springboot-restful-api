@@ -99,7 +99,7 @@ public class BookController {
    *     http://localhost:8080/api/v1/books/25
    */
   @PutMapping("/books/{id}")
-  public HttpEntity<?> booksPut(@Valid @PathVariable Long id, @RequestBody Book newBook) {
+  public HttpEntity<?> booksPut(@PathVariable Long id, @Valid @RequestBody Book newBook) {
     return bookRepository
         .findById(id)
         .map(

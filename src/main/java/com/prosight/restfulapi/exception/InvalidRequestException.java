@@ -11,7 +11,7 @@ import org.springframework.validation.Errors;
  * @date 2020-10-18 10:14
  */
 public class InvalidRequestException extends RuntimeException {
-  @Getter private Errors errors;
+  @Getter private final Errors errors;
 
   public InvalidRequestException(String message, Errors errors) {
     super(message);

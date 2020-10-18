@@ -7,7 +7,7 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 
 /**
  * 配置校验规则
- * 
+ *
  * @author elton
  * @version 1.0
  * @date 2020-10-18 17:29

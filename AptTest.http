@@ -55,8 +55,22 @@ POST http://localhost:8080/api/v2/books
 Content-Type: application/json
 
 {
-  "name": null,
+  "name": "XBox 360",
   "author": "Elton",
   "description": "test",
   "status": 1
 }
+
+###
+
+DELETE http://localhost:8080/api/v2/books/25
+
+###
+
+GET http://localhost:8080/api/v2/books/search/authors?author=Jon Bentley
+Accept: application/json
+
+###
+
+GET http://localhost:8080/api/v2/books/search
+Accept: application/json

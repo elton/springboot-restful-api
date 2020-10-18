@@ -8,8 +8,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
 
-import java.util.List;
-
 /**
  * Spring Data Rest 资源类，在application.yml中配置了v2路径
  * @RestController 完全自定义控制器，完全交由自己处理
@@ -47,5 +45,5 @@ public interface BookRestRepository extends JpaRepository<Book, Long> {
      * @return 书单
      */
     @RestResource(path = "authors", rel = "authors")
-    List<Book> findBookByAuthor(@Param("author") String author);
+    Book findBookByAuthor(@Param("author") String author);
 }

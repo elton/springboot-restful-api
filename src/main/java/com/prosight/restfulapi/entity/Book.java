@@ -30,7 +30,6 @@ public class Book {
   @Column(columnDefinition = "varchar(255) comment '描述'")
   public String description;
 
-  @NotNull
   @ColumnDefault("1")
   @Column(columnDefinition = "tinyint(1) comment '是否存在'")
   public Boolean status;

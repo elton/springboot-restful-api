@@ -10,6 +10,10 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
+  data:
+    rest:
+      base-path: /v2
+      default-page-size: 10
 server:
   servlet:
     context-path: /api

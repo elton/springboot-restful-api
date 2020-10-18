@@ -7,6 +7,7 @@ import com.prosight.restfulapi.resource.FieldResource;
 import com.prosight.restfulapi.resource.InvalidErrorResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.rest.core.RepositoryConstraintViolationException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,7 @@ public class ApiExceptionHandler {
 
   @ExceptionHandler(InvalidRequestException.class)
   public HttpEntity<?> handleInvalidRequest(InvalidRequestException e) {
+    logger.error(e.getMessage());
     Errors errors = e.getErrors();
     List<FieldResource> fieldResources = new ArrayList<>();
     List<FieldError> fieldErrors = errors.getFieldErrors();
@@ -51,6 +53,26 @@ public class ApiExceptionHandler {
     }
     InvalidErrorResource invalidErrorResource =
         new InvalidErrorResource(e.getMessage(), fieldResources);
+    logger.error(invalidErrorResource.toString());
+    return new ResponseEntity<>(invalidErrorResource, HttpStatus.BAD_REQUEST);
+  }
+
+  @ExceptionHandler(RepositoryConstraintViolationException.class)
+  public HttpEntity<?> handleRepositoryConstraintViolationException(RepositoryConstraintViolationException e) {
+    logger.error(e.getMessage());
+    Errors errors = e.getErrors();
+    List<FieldResource> fieldResources = new ArrayList<>();
+    List<FieldError> fieldErrors = errors.getFieldErrors();
+    for (FieldError fieldError : fieldErrors) {
+      fieldResources.add(
+              new FieldResource(
+                      fieldError.getObjectName(),
+                      fieldError.getField(),
+                      fieldError.getCode(),
+                      fieldError.getDefaultMessage()));
+    }
+    InvalidErrorResource invalidErrorResource =
+            new InvalidErrorResource(e.getMessage(), fieldResources);
     logger.error(invalidErrorResource.toString());
     return new ResponseEntity<>(invalidErrorResource, HttpStatus.BAD_REQUEST);
   }

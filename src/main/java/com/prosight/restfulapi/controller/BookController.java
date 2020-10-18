@@ -1,11 +1,14 @@
 package com.prosight.restfulapi.controller;
 
 import com.prosight.restfulapi.entity.Book;
+import com.prosight.restfulapi.exception.InvalidRequestException;
+import com.prosight.restfulapi.exception.ResourceNotFoundException;
 import com.prosight.restfulapi.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -60,7 +63,12 @@ public class BookController {
    */
   @GetMapping("/books/{id}")
   public HttpEntity<?> booksOne(@PathVariable Long id) {
-    return new ResponseEntity<>(bookRepository.findById(id).orElse(null), HttpStatus.OK);
+    return new ResponseEntity<>(
+        bookRepository
+            .findById(id)
+            .orElseThrow(
+                () -> new ResourceNotFoundException(String.format("Book by id %s not found", id))),
+        HttpStatus.OK);
   }
 
   /**
@@ -73,7 +81,10 @@ public class BookController {
    *     http://localhost:8080/api/v1/books
    */
   @PostMapping("/books")
-  public HttpEntity<?> booksAdd(@Valid @RequestBody Book book) {
+  public HttpEntity<?> booksAdd(@Valid @RequestBody Book book, BindingResult bindingResult) {
+    if(bindingResult.hasErrors()){
+      throw new InvalidRequestException("Invalid parameters", bindingResult);
+    }
     return new ResponseEntity<>(bookRepository.save(book), HttpStatus.CREATED);
   }
 

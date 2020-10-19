@@ -17,23 +17,15 @@ import lombok.ToString;
 @ToString
 @Getter
 public class FieldResource {
-    /**
-     * 实体对象
-     */
-    private String resource;
+  /** 实体对象 */
+  private String resource;
 
-    /**
-     * 字段
-     */
-    private String field;
+  /** 字段 */
+  private String field;
 
-    /**
-     * 代码
-     */
-    private String code;
+  /** 代码 */
+  private String code;
 
-    /**
-     * 其他信息
-     */
-    private String message;
+  /** 其他信息 */
+  private String message;
 }

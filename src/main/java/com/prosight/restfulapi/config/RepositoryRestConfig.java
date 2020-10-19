@@ -6,7 +6,7 @@ import org.springframework.data.rest.core.event.ValidatingRepositoryEventListene
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 
 /**
- * 配置校验规则
+ * 配置校验规则（使用Spring Data Rest中用到）
  *
  * @author elton
  * @version 1.0

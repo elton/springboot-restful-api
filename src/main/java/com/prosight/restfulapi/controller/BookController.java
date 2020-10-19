@@ -82,7 +82,7 @@ public class BookController {
    */
   @PostMapping("/books")
   public HttpEntity<?> booksAdd(@Valid @RequestBody Book book, BindingResult bindingResult) {
-    if(bindingResult.hasErrors()){
+    if (bindingResult.hasErrors()) {
       throw new InvalidRequestException("Invalid parameters", bindingResult);
     }
     return new ResponseEntity<>(bookRepository.save(book), HttpStatus.CREATED);

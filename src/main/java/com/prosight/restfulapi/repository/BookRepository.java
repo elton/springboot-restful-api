@@ -12,5 +12,4 @@ import org.springframework.stereotype.Repository;
  * @date 2020-10-16 13:35
  */
 @Repository
-public interface BookRepository extends JpaRepository<Book, Long> {
-}
+public interface BookRepository extends JpaRepository<Book, Long> {}

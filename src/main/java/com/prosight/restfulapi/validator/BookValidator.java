@@ -7,6 +7,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 /**
+ * Book 校验类 （使用Spring Data Rest中用到）
  * @author elton
  * @version 1.0
  * @date 2020-10-18 17:17

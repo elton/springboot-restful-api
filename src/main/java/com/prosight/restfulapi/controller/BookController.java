@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Restful 风格 API
@@ -47,10 +48,10 @@ public class BookController {
    * <p>
    *
    * @return HTTP 响应
-   *     <p>curl http://localhost:8080/api/v1/books
+   *     <p>curl https://localhost:8443/api/v1/books
    */
   @GetMapping("/books")
-  public HttpEntity<?> books() {
+  public HttpEntity<List<Book>> books() {
     return new ResponseEntity<>(bookRepository.findAll(), HttpStatus.OK);
   }
 
@@ -59,10 +60,10 @@ public class BookController {
    *
    * @param id 书单id
    * @return http 响应
-   *     <p>curl http://localhost:8080/api/v1/books/1
+   *     <p>curl https://localhost:8443/api/v1/books/1
    */
   @GetMapping("/books/{id}")
-  public HttpEntity<?> booksOne(@PathVariable Long id) {
+  public HttpEntity<Book> booksOne(@PathVariable Long id) {
     return new ResponseEntity<>(
         bookRepository
             .findById(id)
@@ -78,7 +79,7 @@ public class BookController {
    * @return http 响应
    *     <p>curl -X POST -H "Content-Type: application/json" -d "{\"name\":\"XBox
    *     360\",\"author\":\"Elton\",\"description\":\"test\",\"status\":1}"
-   *     http://localhost:8080/api/v1/books
+   *     https://localhost:8443/api/v1/books
    */
   @PostMapping("/books")
   public HttpEntity<?> booksAdd(@Valid @RequestBody Book book, BindingResult bindingResult) {
@@ -96,7 +97,7 @@ public class BookController {
    * @return http 响应
    *     <p>curl -X PUT -H "Content-Type: application/json" -d "{\"name\":\"PlayStation
    *     4\",\"author\":\"Elton\",\"description\":\"test\",\"status\":1}"
-   *     http://localhost:8080/api/v1/books/25
+   *     https://localhost:8443/api/v1/books/25
    */
   @PutMapping("/books/{id}")
   public HttpEntity<?> booksPut(@PathVariable Long id, @Valid @RequestBody Book newBook) {
@@ -122,10 +123,10 @@ public class BookController {
    *
    * @param id 书单id
    * @return http 响应
-   *     <p>curl -X DELETE http://localhost:8080/api/v1/books/25
+   *     <p>curl -X DELETE https://localhost:8443/api/v1/books/25
    */
   @DeleteMapping("/books/{id}")
-  public HttpEntity<?> booksDelete(@PathVariable Long id) {
+  public HttpEntity<String> booksDelete(@PathVariable Long id) {
     bookRepository.deleteById(id);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }

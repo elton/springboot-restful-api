@@ -17,3 +17,24 @@ spring:
 server:
   servlet:
     context-path: /api
+  compression:
+    enabled: true
+  port: 8443
+  #  使用mkcert创建本地证书（https://github.com/FiloSottile/mkcert）
+  #  brew install mkcert
+  #  mkcert localhost 127.0.0.1 ::1
+  #
+  # Spring boot 配置HTTP/2 https://byte27.com/2020/02/03/using-http-2-in-your-spring-boot-application/
+  http2:
+    enabled: true
+  ssl:
+    enabled: true
+    key-store-type: PKCS12
+    key-store: classpath:localhost.p12
+    key-store-password: 123456
+    key-alias: localhost
+management:
+  endpoint:
+    health:
+      show-details: always
+#
